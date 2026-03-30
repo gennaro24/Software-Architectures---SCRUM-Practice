@@ -34,7 +34,7 @@ Each sprint produces a **potentially shippable increment**.
 ---
 ## Technical Details
 - Language: Java
-- IDE: IntelliJ IDEA
+- IDE: VScode
 - Version Control: Git
 - Collaboration: Trello [https://trello.com/b/9FpTQUwS/scrum-process-practice]
 - Every Technical Feature must be implemented in a single branch, then pushed in the main branch
