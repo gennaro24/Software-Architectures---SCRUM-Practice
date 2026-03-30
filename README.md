@@ -26,14 +26,15 @@ Each sprint produces a **potentially shippable increment**.
 
 ## 👥 Team
 
-- Product Owner: `<Italo Annunziata>`
-- SCRUM Master: '<Foschillo Gennaro>'
+- Product Owner: `Italo Annunziata`
+- SCRUM Master: 'Foschillo Gennaro'
 - Team Component
   - `Aniello Di Meglio`
   - `Foschillo Gennaro`
   - `Italo Annunziata`
-  - 'Francesco Vittorio Allocca'
+  - '<Francesco Vittorio Allocca>'
 
 ---
 
 ## 🗂️ Project Structure
+
