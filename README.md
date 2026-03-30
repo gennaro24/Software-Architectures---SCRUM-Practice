@@ -32,7 +32,12 @@ Each sprint produces a **potentially shippable increment**.
   - `Francesco Vittorio Allocca`
 
 ---
-
+## Technical Details
+- Language: Java
+- IDE: IntelliJ IDEA
+- Version Control: Git
+- Collaboration: Trello [https://trello.com/b/9FpTQUwS/scrum-process-practice]
+- Every Technical Feature must be implemented in a single branch, then pushed in the main branch
 ## 🗂️ Project Structure
-`/docs`: Contains all the docs to comprehend the task of the project
-`/code`: the codebase of the project.
+- `/docs`: Contains all the SCRUM docs.
+- `/code`: the codebase of the project.
