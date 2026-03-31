@@ -4,17 +4,24 @@ public class Operation{
     private double operand2;
     private String operator;
     private int numTokens;
+    private String flag;
     public Operation(){
         this.operand1 = 0.0;
         this.operand2 = 0.0;
         this.operator = "";
         this.numTokens = 0;
     }
+    
     public Operation(double operand1, double operand2, String operator, int numTokens){
         this.operand1 = operand1;
         this.operand2 = operand2;
         this.operator = operator;
         this.numTokens = numTokens;
+    }
+    public Operation(double operand1, int numTokens, String flag){
+        this.operand1 = operand1;
+        this.numTokens = numTokens;
+        this.flag = flag;
     }
     // getters and setters
     public double getOperand1() {
@@ -40,5 +47,11 @@ public class Operation{
     }
     public void setNumTokens(int numTokens) {
         this.numTokens = numTokens;
+    }
+    public String getFlag() {
+        return flag;
+    }
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 }

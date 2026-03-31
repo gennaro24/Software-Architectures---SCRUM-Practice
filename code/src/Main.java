@@ -1,4 +1,7 @@
-import CalculatorEngine;
+import java.util.Locale;
+import java.util.Scanner;
+
+
 
 public class Main{
     public static void main(String[] args) {
@@ -6,9 +9,10 @@ public class Main{
         Locale.setDefault(Locale.US);
         Scanner scanner = new Scanner(System.in);
         CalculatorEngine calculatorEngine = new CalculatorEngine();
-        CalculatorEngine.setAns(0.0);
-        CalculatorEngine.setMemory(0.0);
+        CalculatorParser calculatorParser = new CalculatorParser();
 
+        calculatorEngine.setAns(0.0);
+        calculatorEngine.setMemory(0.0);
         printWelcome();
 
 
@@ -31,9 +35,94 @@ public class Main{
             }
 
             try {
-                Operation operation = calculatorEngine.parse(line, calculatorEngine.getAns(), calculatorEngine.getMemory());
-                
+                double ans;
+                Operation operation = calculatorParser.parse(
+                    line,
+                    calculatorEngine.getAns(),
+                    calculatorEngine.getMemory()
+                );
+
+                if(operation.getNumTokens() == 3){
+                    switch (operation.getOperator()) {
+                        case "+":
+                            ans = calculatorEngine.add(operation.getOperand1(), operation.getOperand2());
+                            System.out.println("= " + ans);
+                            break;
+                        case "-":
+                            ans = calculatorEngine.sub(operation.getOperand1(), operation.getOperand2());
+                            System.out.println("= " + ans);
+                            break;
+                        case "*":
+                            ans = calculatorEngine.mul(operation.getOperand1(), operation.getOperand2());
+                            System.out.println("= " + ans);
+                            break;
+                        case "/":
+                            ans = calculatorEngine.div(operation.getOperand1(), operation.getOperand2());
+                            System.out.println("= " + ans);
+                            break;
+                        default:
+                            System.err.println("Invalid operation.");
+                            break;
+                    }
+                }else if(operation.getNumTokens() == 2){
+                    switch (operation.getOperator()) {
+                        case "cos":
+                            ans = calculatorEngine.cos(operation.getOperand1());
+                            System.out.println("= " + ans);
+                            break;
+                        case "sin":
+                            ans = calculatorEngine.sin(operation.getOperand1());
+                            System.out.println("= " + ans);
+                            break;
+                        case "mem+":
+                            calculatorEngine.setMemory(
+                                calculatorEngine.getMemory() + operation.getOperand1()
+                            );
+                            System.out.println("= " + calculatorEngine.getMemory());
+                            break;
+                        case "mem-":
+                            calculatorEngine.setMemory(
+                                calculatorEngine.getMemory() - operation.getOperand1()
+                            );
+                            System.out.println("= " + calculatorEngine.getMemory());
+                            break;
+                        case "setmem":
+                            calculatorEngine.setMemory(operation.getOperand1());
+                            System.out.println("= " + calculatorEngine.getMemory());
+                            break;
+                        default:
+                            System.err.println("Invalid operation.");
+                            break;
+                    }
+                }else if(operation.getNumTokens() == 1){
+                    if("0".equals(operation.getFlag())) {
+                        ans = calculatorEngine.setAns(operation.getOperand1());
+                        System.out.println("= " + ans);
+                    }else if("ans".equalsIgnoreCase(operation.getFlag())) {
+                        ans = calculatorEngine.getAns();
+                        System.out.println("= " + ans);
+                    }else if("mem".equalsIgnoreCase(operation.getFlag())) {
+                        ans = calculatorEngine.getMemory();
+                        System.out.println("= " + ans);
+                    }else if("memclear".equalsIgnoreCase(operation.getFlag())) {
+                        calculatorEngine.clearMemory();
+                        System.out.println("= " + calculatorEngine.getMemory());
+                    }else if("ansclear".equalsIgnoreCase(operation.getFlag())) {
+                        calculatorEngine.clearAns();
+                        System.out.println("= " + calculatorEngine.getAns());
+                    }else {
+                        System.err.println("Invalid flag.");
+                        continue;
+                    }
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("Formato numero non valido.");
+                continue;
+            } catch (IllegalArgumentException e) {
+                System.err.println("Errore: " + e.getMessage());
+                continue;
             } catch (Exception e) {
+                System.err.println("Errore: " + e.getMessage());
             }
         }
 
@@ -42,15 +131,21 @@ public class Main{
 
 
     private static void printHelp() {
-        System.out.println("1. sum: write a + b ");
-        System.out.println("2. sub: write a - b ");
-        System.out.println("3. mul: write a * b ");
-        System.out.println("4. div: write a / b ");
-        System.out.println("5. cos: write cosA ");
-        System.out.println("6. sin: write sinA ");
-        System.out.println("7. ans: write ans to get the result of the last operation ");
-        System.out.println("8. clear: write clear to reset the ans variable ");
-        System.out.println("9. exit: write exit to quit the program ");
+        System.out.println("1. add: write a + b");
+        System.out.println("2. sub: write a - b");
+        System.out.println("3. mul: write a * b");
+        System.out.println("4. div: write a / b");
+        System.out.println("5. cos: write cos a");
+        System.out.println("6. sin: write sin a");
+        System.out.println("7. ans: write ans to read last result");
+        System.out.println("8. set ans: write a (single number)");
+        System.out.println("9. mem: write mem to read memory");
+        System.out.println("10. mem add: write mem+ a");
+        System.out.println("11. mem sub: write mem- a");
+        System.out.println("12. set mem: write setmem a");
+        System.out.println("13. clear ans: write ansclear");
+        System.out.println("14. clear mem: write memclear");
+        System.out.println("15. exit: write exit to quit");
         
     }
     private static void printWelcome() {

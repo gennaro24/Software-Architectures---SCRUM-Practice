@@ -15,44 +15,67 @@ public class CalculatorParser{
      **/
     public Operation parse(String input, double ans, double mem){
         operation = new Operation();
-        String[] tokens = input.split(" ");
+        String[] tokens = input.trim().split("\\s+");
+
         if(tokens.length == 3){
-            Double operand1 = tokens[0].equalsIgnoreCase("ans" ) ? ans :
-                              tokens[0].equalsIgnoreCase("mem") ?  mem :
-                              Double.parseDouble(tokens[0]);
-            Double operand2 = tokens[2].equalsIgnoreCase("ans" ) ? ans :
-                              tokens[2].equalsIgnoreCase("mem") ?  mem :
-                              Double.parseDouble(tokens[2]);
+            Double operand1 = parseValue(tokens[0], ans, mem);
+            Double operand2 = parseValue(tokens[2], ans, mem);
             String operator = tokens[1];
             operation.setOperand1(operand1);
             operation.setOperand2(operand2);
             operation.setOperator(operator);
+            operation.setNumTokens(3);
             return operation;
         }
+
         if (tokens.length == 1){
-            // salvataggio numero in ans dopo invio.
-            if(tokens[0].equalsIgnoreCase("ans")){
+            String token = tokens[0];
+            if (token.equalsIgnoreCase("ans")) {
                 operation.setOperand1(ans);
-                operation.setNumTokens(1);
-                return operation;
-            }
-            if(tokens[0].equalsIgnoreCase("mem")){
+                operation.setFlag("ans");
+            } else if (token.equalsIgnoreCase("mem")) {
                 operation.setOperand1(mem);
-                operation.setNumTokens(1);
+                operation.setFlag("mem");
+            } else if (token.equalsIgnoreCase("memclear")) {
+                operation.setFlag("memclear");
+            } else if (token.equalsIgnoreCase("ansclear")) {
+                operation.setFlag("ansclear");
+            } else {
+                operation.setOperand1(Double.parseDouble(token));
+                operation.setFlag("0");
+            }
+            operation.setNumTokens(1);
+            return operation;
+        }
+
+        if (tokens.length == 2) {
+            String op = tokens[0].toLowerCase();
+            double val = parseValue(tokens[1], ans, mem);
+
+            operation.setOperator(op);
+            operation.setNumTokens(2);
+
+            if (op.equals("cos") || op.equals("sin")) {
+                operation.setOperand1(val);
                 return operation;
             }
-            //boilerplate
-            return new Operation();
-
-            
-            // operazioni di memoria: mem (richiama ), memc (clear),
-            // operazioni di ans: ans(richiama), ansc (clear) 
-
+            if (op.equals("mem+") || op.equals("mem-") || op.equals("setmem")) {
+                operation.setOperand1(val);
+                operation.setFlag(op);
+                return operation;
+            }
         }
-        //boilerplate 
+
         return new Operation();
-        // da completare per le operazioni di: 1. memoria e trigonometriche
+    }
 
-
+    private double parseValue(String token, double ans, double mem) {
+        if (token.equalsIgnoreCase("ans")) {
+            return ans;
+        }
+        if (token.equalsIgnoreCase("mem")) {
+            return mem;
+        }
+        return Double.parseDouble(token);
     }
 }

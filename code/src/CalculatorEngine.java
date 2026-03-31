@@ -1,4 +1,3 @@
-
 // This class is created to abstract the main operation of a calculator. It provides basic arithmetic operation.
 public class CalculatorEngine{
     // this variable is used to store the result of the last operation, accessed by getAns() method
@@ -40,7 +39,7 @@ public class CalculatorEngine{
         return ans;
     }
     public void clearAns(){
-        ans = 0.0;
+        this.ans = 0.0;
     }
     public double setAns(double a){
         ans = a;
@@ -55,5 +54,5 @@ public class CalculatorEngine{
     public void setMemory(double a){
         memory = a;
     }
-    
+
 }
