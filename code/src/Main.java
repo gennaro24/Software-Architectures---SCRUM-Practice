@@ -1,4 +1,7 @@
-import CalculatorEngine;
+import java.util.Locale;
+import java.util.Scanner;
+
+
 
 public class Main{
     public static void main(String[] args) {
@@ -6,8 +9,9 @@ public class Main{
         Locale.setDefault(Locale.US);
         Scanner scanner = new Scanner(System.in);
         CalculatorEngine calculatorEngine = new CalculatorEngine();
-        CalculatorEngine.setAns(0.0);
-        CalculatorEngine.setMemory(0.0);
+        CalculatorParser calculatorParser = new CalculatorParser();
+
+        calculatorEngine.setAns(0.0);
 
         printWelcome();
 
@@ -31,8 +35,30 @@ public class Main{
             }
 
             try {
-                Operation operation = calculatorEngine.parse(line, calculatorEngine.getAns(), calculatorEngine.getMemory());
+                double Ans;
+                Operation operation = calculatorParser.parse(line, calculatorEngine.getAns(), 0);
                 
+                CalculatorEngine calculator = new CalculatorEngine();
+        
+                if(operation.getNumTokens() == 3){
+                    switch (operation.getOperator()) {
+                        case "+":
+                            Ans = calculator.add(operation.getOperand1(), operation.getOperand2());
+                            break;
+                        case "-":
+                            Ans = calculator.sub(operation.getOperand1(), operation.getOperand2());
+                            break;
+                        case "*":
+
+                            break;
+                        case "/":
+                            break;
+                        default:
+                            System.err.println("Operazione non valida");
+                            break;
+                    }
+                }
+
             } catch (Exception e) {
             }
         }
