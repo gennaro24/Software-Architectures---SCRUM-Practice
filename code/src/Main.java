@@ -44,22 +44,38 @@ public class Main{
                     switch (operation.getOperator()) {
                         case "+":
                             Ans = calculator.add(operation.getOperand1(), operation.getOperand2());
+                            calculatorEngine.setAns(Ans);
+                            System.out.println("= " + Ans);
                             break;
                         case "-":
                             Ans = calculator.sub(operation.getOperand1(), operation.getOperand2());
+                            calculatorEngine.setAns(Ans);
+                            System.out.println("= " + Ans);
                             break;
                         case "*":
-
+                            Ans = calculator.mul(operation.getOperand1(), operation.getOperand2());
+                            calculatorEngine.setAns(Ans);
+                            System.out.println("= " + Ans);
                             break;
                         case "/":
+                            Ans = calculator.div(operation.getOperand1(), operation.getOperand2());
+                            calculatorEngine.setAns(Ans);
+                            System.out.println("= " + Ans);
                             break;
                         default:
-                            System.err.println("Operazione non valida");
+                            System.err.println("Invalid operation.");
                             break;
                     }
                 }
+            catch (IllegalArgumentException e) {
+                System.err.println("Division by zero is not allowed.");
+                continue;
+            }
+            
 
             } catch (Exception e) {
+                throw new RuntimeException(e);
+                
             }
         }
 

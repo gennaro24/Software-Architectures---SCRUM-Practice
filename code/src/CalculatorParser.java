@@ -15,7 +15,7 @@ public class CalculatorParser{
      **/
     public Operation parse(String input, double ans, double mem){
         operation = new Operation();
-        String[] tokens = input.split(" ");
+        String[] tokens = input.trim().split("\\s+");
         if(tokens.length == 3){
             Double operand1 = tokens[0].equalsIgnoreCase("ans" ) ? ans :
                               tokens[0].equalsIgnoreCase("mem") ?  mem :
@@ -27,6 +27,7 @@ public class CalculatorParser{
             operation.setOperand1(operand1);
             operation.setOperand2(operand2);
             operation.setOperator(operator);
+            operation.setNumTokens(3);
             return operation;
         }
         if (tokens.length == 1){
