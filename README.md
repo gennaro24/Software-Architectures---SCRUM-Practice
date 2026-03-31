@@ -1,6 +1,6 @@
 # SCRUM Practice – Calculator Project
 
-## 📌 Overview
+## Overview
 This project is developed as part of a Scrum practice exercise.
 
 The goal is to implement a **calculator application** that supports:
@@ -10,7 +10,7 @@ The goal is to implement a **calculator application** that supports:
 
 > The application does not require a graphical interface.
 
-## 🧠 Scrum Context
+## Scrum Context
 
 The project is developed following a **Scrum process simulation**, structured into:
 
@@ -24,7 +24,7 @@ The project is developed following a **Scrum process simulation**, structured in
 Each sprint produces a **potentially shippable increment**.
 
 
-## 👥 Team
+## Team
 
   - `Aniello Di Meglio`
   - `Foschillo Gennaro`
@@ -38,6 +38,6 @@ Each sprint produces a **potentially shippable increment**.
 - Version Control: Git
 - Collaboration: Trello [https://trello.com/b/9FpTQUwS/scrum-process-practice]
 - Every Technical Feature must be implemented in a single branch, then pushed in the main branch
-## 🗂️ Project Structure
+## Project Structure
 - `/docs`: Contains all the SCRUM docs.
 - `/code`: the codebase of the project.
