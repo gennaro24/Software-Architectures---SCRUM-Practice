@@ -13,7 +13,7 @@ Setup of Scrum environment and initial organization of the project, including ro
 - [x] Get user stories from the PO (min 4)
 - [x] Define Definition of Done 
 - [x] Decide technical stack
-- [ ] Update Trello Board (In progress - Tomorrow 31-03-26) 
+- [x] Update Trello Board  
 
 ---
 
